@@ -110,8 +110,8 @@ def gh_json(args: list, timeout: int = 30):
 
 def is_actionable(issue: dict, cfg: dict) -> bool:
     labels = {l["name"].lower() for l in issue.get("labels", [])}
-    if issue.get("state") != "open":
-        return False
+    if str(issue.get("state", "")).lower() != "open":
+        return False  # gh issue list --json emits uppercase "OPEN"
     if not all(r.lower() in labels for r in cfg["required_labels"]):
         return False
     if labels & {e.lower() for e in cfg["excluded_labels"]}:
@@ -132,7 +132,7 @@ def compute_drive(cfg: dict) -> dict:
     issues = gh_json([
         "issue", "list", "-R", cfg["repository"],
         "--state", "open", "--limit", "200",
-        "--json", "number,title,labels,createdAt",
+        "--json", "number,title,state,labels,createdAt",
     ])
     actionable = [i for i in issues if is_actionable(i, cfg)]
     m_t = len(actionable)
