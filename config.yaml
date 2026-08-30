@@ -18,5 +18,5 @@ drive:
 hermes:
   schedule: "every 1m"
   reasoning_effort: high
-  workdir: /Users/seungkilpaek/Documents/goodwill-harness-r1
+  workdir: /Users/seungkilpaek/Documents/goodwill-harness-target
   job_name: goodwill-issue-drive
