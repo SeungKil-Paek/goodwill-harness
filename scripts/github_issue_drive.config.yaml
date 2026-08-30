@@ -1,0 +1,16 @@
+github:
+  repository: SeungKil-Paek/goodwill-harness
+
+issue_filter:
+  required_labels:
+    - agent
+  excluded_labels:
+    - human
+    - do-not-automate
+
+desired_state:
+  actionable_open_issues: 0
+
+drive:
+  threshold: 0
+  selection: lowest_number
